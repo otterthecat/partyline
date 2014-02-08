@@ -13,30 +13,23 @@ var testFunc = function(num){
 
 // modules to test
 // /////////////////////////////////////////////////////////
-var Partyline = require('../../index');
-var pl, o, x;
+var partyline = require('../../index');
+var o, x;
 
 describe('Partyline', function(){
 
     beforeEach(function(){
 
-        pl = new Partyline();
-        o = pl.create();
+        o = partyline.derive();
         x = 0;
     });
 
-    it('should be a constructor function', function(){
-
-        Partyline.should.be.a('Function');
-        pl.should.be.an.instanceOf(Partyline);
-    });
-
-    describe('#create()', function(){
+    describe('#derive()', function(){
 
         it('should return a new constructor object', function(){
 
             o.should.be.a('Function');
-            o.prototype.should.be.deep.equal(Partyline.prototype);
+            o.prototype.should.be.deep.equal(partyline.constructor.prototype);
         });
     });
 
@@ -44,11 +37,11 @@ describe('Partyline', function(){
 
         it('should update the registries object', function(){
 
-            pl.register(eventName, testFunc);
+            partyline.register(eventName, testFunc);
 
-            pl.registries[eventName].should.be.an('Array');
-            pl.registries[eventName].length.should.deep.equal(1);
-            pl.registries[eventName][0].should.deep.equal(testFunc);
+            partyline.registries[eventName].should.be.an('Array');
+            partyline.registries[eventName].length.should.deep.equal(1);
+            partyline.registries[eventName][0].should.deep.equal(testFunc);
 
         });
     });
@@ -57,8 +50,8 @@ describe('Partyline', function(){
 
         it('should trigger all registered callbacks to defined event', function(){
 
-            pl.register(eventName, testFunc);
-            pl.broadcast('test', 3);
+            partyline.register(eventName, testFunc);
+            partyline.broadcast('test', 3);
 
             x.should.deep.equal(3);
         });
@@ -68,7 +61,7 @@ describe('Partyline', function(){
 
         it('should be an object', function(){
 
-            pl.registries.should.be.an('object');
+            partyline.registries.should.be.an('object');
         });
     });
 });
