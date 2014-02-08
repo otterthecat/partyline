@@ -1,0 +1,25 @@
+{
+  "name": "Partyline",
+  "title": "Partyline",
+  "description": "Extension of EventEmitter that allows for listening/triggering events across multiple objects.",
+  "version": "0.0.1",
+  "homepage": "git@github.com:otterthecat/partyline.git",
+  "author": {
+    "name": "Otter the Cat",
+    "email": "otc@otterthecat.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otterthecat/partyline.git"
+  },
+  "dependencies": {
+
+    "grunt-contrib-jshint": "*",
+    "grunt-mocha-cli": "*",
+    "grunt-complexity": "*",
+    "grunt-plato": "*",
+    "mocha": "*",
+    "chai": "*"
+  },
+  "keywords": ["events", "otc"]
+}
