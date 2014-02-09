@@ -17,14 +17,21 @@ Include it as you would any other module, and derive a new instance
 ```javascript
 var pl = require('./partyline');
 ```
-Now you can use the Partyline instance's `.derive()` method to be the basis for your custom module/constructor(s)
+Now you can use the Partyline instance's `.derive()` method to be the basis for your custom module/constructor(s). Note that the returned constructor function also makes an internal call
+to an method `.init()`, which can be used to set any internal variables or set up code within the
+constructor.
 
 ```javacript
 var MyModule = pl.derive();
 
 var MyOtherModule = pl.derive();
+MyOtherModule.prototype.init = function(){
+    // your own inititalization code here
+};
 
 var objectA = new MyModule();
+
+// will run your code set in the .init() method above
 var objectB = new MyOtherModule();
 ```
 
@@ -61,15 +68,16 @@ pl.broadcast('someEvent');
 Also remember, that since Partyline extend NodeJS' `events.EventEmitter` object, all instances above are
 able to use `.on()` and `.emit()` methods as you would do so with EventEmitter. Note that using events in this manner are not broadcasted to children of Partlyline.
 
-Lastly, if using Browserify, you can include Partyline into your clientside scripts as well.
+Lastly, if using [Browserify](https://github.com/substack/node-browserify), you can include Partyline into your clientside scripts as well.
 
 ## API
 
-`.derive()`
+`.derive([function])`
 
-Returns a function who's prototype matches Partyline's prototype. This function can then be further extended as needed with your own functionality.
+Returns a function who's prototype matches Partyline's prototype. This function can then be further extended as needed with your own functionality. You may also extend a current constructor function
+by passing it as an argument. In this case, the return value will be your updated constcuctor.
 
-`.register(ev, callback)`
+`.register(event, callback)`
 
 Adds and event with callback to the `.registries` object. Can be triggered by any descendant of Partyline.
 

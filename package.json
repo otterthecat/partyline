@@ -1,7 +1,7 @@
 {
   "name": "partyline",
   "description": "Extension of EventEmitter that allows for multiple objects to act as shared observers",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "homepage": "https://github.com/otterthecat/partyline",
   "author": {
     "name": "Otter the Cat",
